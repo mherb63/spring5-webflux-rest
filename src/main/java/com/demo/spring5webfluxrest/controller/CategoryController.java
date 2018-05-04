@@ -2,9 +2,9 @@ package com.demo.spring5webfluxrest.controller;
 
 import com.demo.spring5webfluxrest.domain.Category;
 import com.demo.spring5webfluxrest.repository.CategoryRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.reactivestreams.Publisher;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -25,6 +25,22 @@ public class CategoryController {
     @GetMapping("/category/{id}")
     Mono<Category> getById(@PathVariable String id) {
         return categoryRepository.findById(id);
+    }
+
+    @PostMapping("/category")
+    @ResponseStatus(HttpStatus.CREATED)
+    Flux<Category> create(@RequestBody Publisher<Category> categoryPublisher){
+        return categoryRepository.saveAll(categoryPublisher);
+    }
+
+    @PutMapping("/category/{id}")
+    Mono<Category> update(@RequestBody Category category, @PathVariable String id) {
+        return categoryRepository.save(category);
+    }
+
+    @DeleteMapping("/category/{id}")
+    Mono<Void> delete(@PathVariable String id) {
+       return categoryRepository.deleteById(id);
     }
 
 }
