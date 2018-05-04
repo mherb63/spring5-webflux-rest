@@ -1,5 +1,3 @@
-https://circleci.com/gh/:owner/:repo.png?circle-token=:circle-token
-
-https://circleci.com/gh/:owner/:repo.svg?style=shield&circle-token=:circle-token
+[![CircleCI](https://circleci.com/gh/mherb63/spring5-webflux-rest.svg?style=svg)](https://circleci.com/gh/mherb63/spring5-webflux-rest)
 
 # spring5-webflux-rest
